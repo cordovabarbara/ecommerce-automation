@@ -1,7 +1,31 @@
+import os
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+import pytest_html.extras as extras
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+        driver = item.funcargs.get('browserInstance', None)
+        if driver:
+            try:
+                reports_dir = r"C:\Users\Anais\PycharmProjects\ecommerce-automation\reports"
+                screenshot_file = os.path.join(reports_dir, f"{item.name}.png")
+                driver.save_screenshot(screenshot_file)
+                print(f"📸 Screenshot saved: {screenshot_file}")
+
+                if not hasattr(report, "extra"):
+                    report.extra = []
+
+                report.extra.append(extras.image(f"{item.name}.png"))
+
+            except Exception as e:
+                print(f"❌ Error capturing screenshot: {e}")
 
 def pytest_addoption(parser):
     parser.addoption(
