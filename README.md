@@ -18,18 +18,19 @@ Automates the main workflow of the [Saucedemo](https://www.saucedemo.com) demo s
 Uses **Page Object Model (POM)** for clean and reusable code.
 
 ---
-
 ## 📁 Project Structure
+```
+saucedemo-automation/
+├── pages/
+│   ├── login.py
+│   ├── shopping.py
+│   └── checkout.py
+├── tests/
+│   └── test_checkout_flow.py
+├── conftest.py
+├── requirements.txt
+└── README.md
 
-pages/ # Page Objects
-├── login.py
-├── shopping.py
-└── checkout.py
-
-tests/ # End-to-end test
-└── test_checkout_flow.py
-
-```bash
 # Clone repo
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
@@ -38,6 +39,7 @@ cd your-repo
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate     # Windows
+```
 
 # Install dependencies
 pip install -r requirements.txt
@@ -45,3 +47,4 @@ pip install -r requirements.txt
 # Run test
 pytest tests/test_checkout_flow.py
 
+<h2>Happy Testing! 🚀</h2> 
